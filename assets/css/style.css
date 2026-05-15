@@ -1,0 +1,701 @@
+@font-face {
+  font-family: "BalooRegular";
+  src: url("../../fonts/Baloo Regular 400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Afacad";
+  src: url("../../fonts/Afacad-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AbrilFatface";
+  src: url("../../fonts/AbrilFatface-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NotoSansGujaratiBold";
+  src: url("../../fonts/NotoSansGujarati-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansGujaratiRegular";
+  src: url("../../fonts/NotoSansGujarati-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: BarlowCondensedBold;
+  src: url("../../fonts/BarlowCondensed-ExtraBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100vw !important;
+  height: 100%;
+  background-image: url("../images/bg-image-1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.home-btn {
+  position: fixed;
+  top: 2.5vw;
+  left: 4%;
+  width: 3.5vw;
+  z-index: 1000;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.home-btn:hover {
+  transform: scale(1.15);
+}
+
+.home-btn img {
+  width: 100%;
+  display: block;
+}
+
+.page-title {
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  height: auto;
+  text-align: center;
+  z-index: 10000;
+  transition: opacity 3s ease;
+  transform: translateX(-50%);
+  width: fit-content;
+}
+
+.page-title span {
+  width: fit-content;
+  font-size: 4vw;
+  text-align: center;
+  color: white;
+  font-family: "AbrilFatface";
+  display: block;
+  font-weight: bolder !important;
+  text-shadow:
+    0.15vw 0.15vw 0.25vw rgba(0, 0, 0, 0.4),
+    0.3vw 0.3vw 0.5vw rgba(0, 0, 0, 0.4);
+}
+
+.language-container {
+  position: fixed;
+  top: 1vw;
+  right: 3%;
+  display: flex;
+  width: 9vw;
+  padding: 0.2vw 0.3vw;
+  height: auto;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "BalooRegular";
+  border: 0.3vw solid white;
+  background-color: transparent;
+  border-radius: 50vw;
+  pointer-events: auto;
+  z-index: 1000;
+}
+
+.language-container div {
+  width: 2.5vw;
+  height: 2.5vw;
+  font-size: 1.6vw;
+  text-align: center;
+  border: 0.3vw solid white;
+  background: transparent !important;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-family: "BalooRegular", sans-serif;
+}
+
+.language-container div:hover {
+  background-color: white !important;
+  color: #6168EA;
+}
+
+.language-container div.active {
+  background-color: white !important;
+  color: #6168EA;
+}
+
+main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-container,
+.right-container {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-container .title {
+  opacity: 0;
+  transform: translateX(-10vw);
+  animation: titleSlideIn 1s ease forwards;
+}
+
+.left-container .title div {
+  width: fit-content;
+  line-height: 1;
+  color: white;
+  text-align: left;
+  padding-left: 5vw;
+}
+
+.left-container .title .save {
+  font-size: 11vw;
+  font-family: "Afacad";
+}
+
+.left-container .title .water {
+  font-size: 14vw;
+  font-family: "AbrilFatface";
+}
+
+.right-container .nal {
+  position: absolute;
+  width: 22vw;
+  height: auto;
+  top: 18%;
+  right: -3%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.right-container .nal .drop {
+  position: absolute;
+  text-decoration: none;
+  width: 12vw;
+  height: auto;
+  top: 70%;
+  right: 27%;
+  transform: translate(-50%, -50%) scale(0.3);
+  transform-origin: center center;
+  z-index: 1;
+  /* opacity: 0; */
+  animation: dropMoveScale 1s ease-in-out forwards;
+  animation-delay: 1.1s;
+}
+
+.nal>img {
+  position: relative;
+  z-index: 2;
+}
+
+.right-container>.hand {
+  position: absolute;
+  width: 40vw;
+  height: auto;
+  top: 79%;
+  right: 0%;
+  transform: translate(8vw, -50%);
+  opacity: 0;
+  animation: handSlideIn 1s ease forwards;
+  animation-delay: 0.15s;
+}
+
+.nal>img,
+.drop>img,
+.hand>img {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.topics {
+  margin-left: 10%;
+  width: 50%;
+  height: 90%;
+  margin-top: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 4vw;
+}
+
+.topics .topic {
+  position: relative;
+  width: 100%;
+  height: 6vw;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1vw 0 0.6vw;
+}
+
+.topic .point {
+  position: absolute;
+  left: -10%;
+  width: 7vw;
+  height: 7vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.point img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.topic-text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #6168EA;
+  background-color: white;
+  border-radius: 0.5vw;
+  font-family: "BalooRegular";
+  font-size: 2.5vw;
+  line-height: 1;
+  padding: 0.5vw 2vw;
+  transition: background-color 0.2s ease-in;
+}
+
+/* Hindi */
+body[data-lang="hi"] .topic-text {
+  padding: 0.5vw 2.2vw;
+  font-size: 2vw;
+  line-height: 1.15;
+}
+
+/* Gujarati */
+body[data-lang="gu"] .topic-text {
+  font-size: 2vw;
+  line-height: 1.15;
+  font-family: "NotoSansGujaratiBold";
+}
+
+.topic-text:hover {
+  background-color: #F6ED7A;
+}
+
+.num {
+  position: absolute;
+  width: 4.5vw;
+  height: 4.5vw;
+  margin-top: 1vw;
+  border-radius: 50%;
+  background-color: white;
+  color: #6168EA;
+  font-family: "BalooRegular";
+  font-size: 3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.3vw solid #F6ED7A;
+  transition: color 0.3s ease-in, background-color 0.3s ease;
+}
+
+body[data-lang="hi"] .num {
+  padding: 0.5vw 2.2vw;
+  font-size: 3vw;
+  font-weight: bolder !important;
+  line-height: 1.15;
+}
+
+body[data-lang="gu"] .num {
+  font-size: 3vw;
+  line-height: 1.15;
+  font-weight: bolder !important;
+
+  font-family: "NotoSansGujaratiBold";
+}
+
+.num:hover {
+  color: white;
+  background-color: #6168EA;
+}
+
+
+.hand-1 {
+  position: absolute;
+  width: 55vw;
+  height: auto;
+  top: 65%;
+  right: -25%;
+  transform: translate(-0%, -50%);
+}
+
+.water-drop {
+  position: absolute;
+  width: 18vw;
+  height: auto;
+  top: 50%;
+  right: 35%;
+  transform: translate(-0%, -50%);
+}
+
+.hand-1>img,
+.water-drop>img {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+
+.pages {
+  width: 35%;
+  height: 40%;
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  font-family: "BalooRegular";
+}
+
+.pages .page {
+  color: #6168EA;
+  width: 5vw;
+  height: 5vw;
+  border-radius: 50%;
+  border: 0.3vw solid #F6ED7A;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5vw;
+  text-decoration: none !important;
+  transition: background-color 0.3s ease-in, color 0.3s ease-in;
+}
+
+.pages .page:hover {
+  background-color: #6168EA;
+  color: white;
+}
+
+.pages .page.active {
+  opacity: 0.5;
+}
+
+.text-swiper {
+  display: block;
+  width: 80%;
+  height: 20vw;
+  border: 0.1vw solid rgba(255, 255, 255, 0.45);
+  border-radius: 2vw;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(0.5vw);
+  -webkit-backdrop-filter: blur(0.5vw);
+  box-shadow: inset 0 0 1vw rgba(255, 255, 255, 0.08);
+}
+
+.text-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2vw;
+  box-sizing: border-box;
+  text-align: center;
+  flex-direction: column;
+}
+
+.slide-text {
+  width: 100%;
+  color: white;
+  font-family: "BalooRegular";
+  font-size: 2.8vw;
+  line-height: 1;
+  text-align: center;
+}
+
+.sub-text {
+  width: 100%;
+  color: white;
+  font-family: "BalooRegular";
+  line-height: 1;
+  font-size: 1.5vw;
+  text-align: center;
+}
+
+
+.video-swiper {
+  width: 35vw;
+  height: 35vw;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 0.45vw solid #f2e45c;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 1vw rgba(0, 0, 0, 0.25);
+}
+
+.video-swiper .swiper-slide {
+  width: 100%;
+  height: 100%;
+}
+
+.video-swiper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.custom-nav {
+  position: absolute;
+  bottom: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5vw;
+}
+
+.swiper-ctrl-prev,
+.swiper-ctrl-next {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50%;
+  border: 0.2vw solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9vw;
+  position: relative;
+}
+
+.swiper-ctrl-prev i,
+.swiper-ctrl-next i {
+  position: absolute;
+  transition: opacity 0.3s ease;
+  font-size: 1.2vw;
+}
+
+/* default icon visible */
+.icon-default {
+  opacity: 1;
+}
+
+/* hover icon hidden initially */
+.icon-hover {
+  opacity: 0;
+}
+
+/* hover style */
+.swiper-ctrl-prev:hover,
+.swiper-ctrl-next:hover {
+  background: rgba(255, 255, 255, 0.7);
+  color: gray;
+}
+
+/* icon swap */
+.swiper-ctrl-prev:hover .icon-default,
+.swiper-ctrl-next:hover .icon-default {
+  opacity: 0;
+}
+
+.swiper-ctrl-prev:hover .icon-hover,
+.swiper-ctrl-next:hover .icon-hover {
+  opacity: 1;
+}
+
+/* hide button class */
+.swiper-ctrl-prev.hidden,
+.swiper-ctrl-next.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.pranam-container {
+  position: absolute;
+  width: 45vw;
+  height: auto;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pranam-container>.pranam-img {
+  position: relative;
+  width: 85%;
+  height: auto;
+  display: block;
+}
+
+.pranam-container>.pranam-img>img {
+  width: 100%;
+  display: block;
+}
+
+.pranam-img span {
+  z-index: 15;
+  position: absolute;
+  top: 17%;
+  left: 50%;
+  font-size: 3.4vw;
+  transform: translateX(-50%);
+  font-family: "BalooRegular";
+  color: #6168EA;
+}
+
+.pranam-container .home-btn-1 {
+  position: absolute;
+  top: 88%;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  width: 15vw;
+  height: auto;
+  transition: transform 0.2s ease;
+  transform-origin: center center;
+}
+
+.pranam-container .home-btn-1:hover {
+  transform: translateX(-50%) scale(1.2);
+}
+
+.pranam-container .home-btn-1 img {
+  width: 100%;
+  display: block;
+}
+
+.home-btn-1 span {
+  z-index: 15;
+  position: absolute;
+  top: 45%;
+  left: 38%;
+  font-size: 2.5vw;
+  transform: translateY(-50%);
+  font-family: "BalooRegular";
+  color: white;
+}
+
+.back-btn {
+  position: absolute;
+  left: 4%;
+  top: 4%;
+  width: 3vw;
+  height: 3vw;
+  background-color: white;
+  border: 0.25vw solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  z-index: 50;
+}
+
+.back-btn i {
+  color: #6168EA;
+  font-size: 1.2vw;
+  transition: font-size 0.3s ease;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+  background-color: #6168EA;
+}
+
+.back-btn:hover i {
+  font-size: 1.2vw;
+  color: white !important;
+}
+
+@keyframes titleSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10vw);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes handSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(8vw, -50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+@keyframes dropMoveScale {
+  from {
+    opacity: 0;
+    top: 70%;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+
+  to {
+    opacity: 1;
+    top: 160%;
+    transform: translate(-50%, -50%) scale(1.25);
+  }
+}

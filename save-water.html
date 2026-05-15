@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-lang-key="title"></title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <style>
+      .language-container {
+        position: fixed;
+        top: 3vw;
+        right: 3%;
+        display: flex;
+        width: 9vw;
+        padding: 0.2vw 0.3vw;
+        height: auto;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "BalooRegular";
+        border: 0.3vw solid white;
+        background-color: transparent;
+        border-radius: 50vw;
+        pointer-events: auto;
+        z-index: 1000;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="home-button home-btn" href="index.html">
+      <img src="./assets/images/home-btn.png" alt="" />
+    </a>
+    <div class="page-title">
+      <span data-lang-key="title"></span>
+    </div>
+    <!-- nav-container -->
+    <div class="language-container">
+      <div class="english active">E</div>
+      <div class="hindi">H</div>
+      <div class="gujrati">G</div>
+    </div>
+
+    <main>
+      <div class="left-container">
+        <div class="topics">
+          <a href="topic-1.html" class="topic topic-1">
+            <span class="point">
+              <img src="./assets/images/point.png" alt="" />
+              <div class="num" data-lang-key="num-1"></div>
+            </span>
+            <span class="topic-text" data-lang-key="title-1"></span>
+          </a>
+
+          <a href="topic-2.html" class="topic topic-2">
+            <span class="point">
+              <img src="./assets/images/point.png" alt="" />
+              <div class="num" data-lang-key="num-2"></div>
+            </span>
+            <span class="topic-text" data-lang-key="title-2"></span>
+          </a>
+
+          <a href="topic-3.html" class="topic topic-3">
+            <span class="point">
+              <img src="./assets/images/point.png" alt="" />
+              <div class="num" data-lang-key="num-3"></div>
+            </span>
+            <span class="topic-text" data-lang-key="title-3"></span>
+          </a>
+        </div>
+      </div>
+      <div class="right-container">
+        <div class="hand-1">
+          <img src="./assets/images/hand.png" alt="" />
+        </div>
+        <div class="water-drop">
+          <img src="./assets/images/drop.png" alt="" />
+        </div>
+      </div>
+    </main>
+
+    <script src="./assets/js/app.js"></script>
+  </body>
+</html>
