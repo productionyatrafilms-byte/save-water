@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-lang-key="title-1"></title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="./fontawesome/css/all.min.css" />
+
+    <style>
+      img,
+      video {
+        display: block;
+      }
+
+      button {
+        border: none;
+        outline: none;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .language-container {
+        position: fixed;
+        top: 3vw;
+        right: 3%;
+        display: flex;
+        width: 9vw;
+        padding: 0.2vw 0.3vw;
+        height: auto;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "BalooRegular";
+        border: 0.3vw solid white;
+        background-color: transparent;
+        border-radius: 50vw;
+        pointer-events: auto;
+        z-index: 1000;
+      }
+
+      .left-container {
+        width: 60%;
+        height: 100%;
+        padding-left: 9vw;
+        position: relative;
+      }
+
+      .right-container {
+        width: 40%;
+        height: 100%;
+      }
+
+      .video-btn {
+        position: fixed;
+        bottom: 4vw;
+        left: 3vw;
+        z-index: 10000;
+      }
+
+      .start-video-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5vw;
+        padding: 0.4vw 1.3vw 0.4vw 0.45vw;
+        border: 0.22vw solid #f6ed7a;
+        border-radius: 5vw;
+        background: #6168ea;
+        color: #ffffff;
+        font-family: "BalooRegular";
+        font-size: 2vw;
+        font-weight: 900;
+        cursor: pointer;
+        box-shadow: 0 0.25vw 0.45vw rgba(0, 0, 0, 0.28);
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease,
+          transform 0.3s ease;
+      }
+
+      .start-video-btn:hover {
+        background: #ffffff;
+        color: #6168ea;
+        transform: scale(1.04);
+      }
+
+      .start-video-btn:hover .play-circle {
+        background: #6168ea;
+        color: #ffffff;
+      }
+
+      .play-circle {
+        width: 2.8vw;
+        height: 2.8vw;
+        border-radius: 50%;
+        background: #ffffff;
+        color: #6168ea;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3vw;
+        flex-shrink: 0;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+
+      .video-popup {
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: transparent !important;
+      }
+
+      .video-popup.active {
+        display: flex;
+      }
+
+      .video-blur-bg {
+        position: absolute;
+        inset: 0;
+        backdrop-filter: blur(0.8vw);
+        -webkit-backdrop-filter: blur(0.8vw);
+        background: rgba(0, 0, 0, 0.16);
+      }
+
+      .popup-video-box {
+        position: relative;
+        width: 62vw;
+        height: 35vw;
+        z-index: 2;
+        border-radius: 1.5vw;
+        overflow: hidden;
+        background: #000000;
+        border: 0.25vw solid #f6ed7a;
+        box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.38);
+        transition:
+          width 0.5s ease,
+          height 0.5s ease,
+          border-radius 0.5s ease;
+      }
+
+      .popup-video-box.zoomed {
+        width: 85vw;
+        height: 48vw;
+        border-radius: 1vw;
+      }
+
+      .popup-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        pointer-events: none;
+      }
+
+      .video-click-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        cursor: pointer;
+        background: transparent;
+      }
+
+      .video-close-btn {
+        position: absolute;
+        top: 7%;
+        right: 15%;
+        z-index: 10;
+        width: 3vw;
+        height: 3vw;
+        border-radius: 50%;
+        border: 0.18vw solid #f6ed7a;
+        background: #ffffff;
+        color: #6168ea;
+        font-size: 1.5vw;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0.35vw 0.8vw rgba(0, 0, 0, 0.3);
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease,
+          transform 0.3s ease;
+      }
+
+      .video-close-btn:hover {
+        background: #6168ea;
+        color: #ffffff;
+        transform: scale(1.06);
+      }
+
+      .custom-video-controls {
+        position: absolute;
+        left: 50%;
+        bottom: 1vw;
+        transform: translateX(-50%);
+        width: 92%;
+        height: 3.5vw;
+        padding: 0 1vw;
+        z-index: 6;
+        display: flex;
+        align-items: center;
+        gap: 0.8vw;
+        border-radius: 5vw;
+        background: rgba(97, 104, 234, 0.82);
+        border: 0.12vw solid rgba(246, 237, 122, 0.7);
+        backdrop-filter: blur(0.4vw);
+        -webkit-backdrop-filter: blur(0.4vw);
+        box-shadow: inset 0 0 1vw rgba(255, 255, 255, 0.12);
+      }
+
+      .custom-play-btn,
+      .zoom-btn {
+        width: 2.4vw;
+        height: 2.4vw;
+        min-width: 2.4vw;
+        min-height: 2.4vw;
+        max-width: 2.4vw;
+        max-height: 2.4vw;
+        border-radius: 50%;
+        background: #ffffff;
+        color: #6168ea;
+        font-size: 1vw;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease,
+          transform 0.3s ease;
+      }
+
+      .custom-play-btn:hover,
+      .zoom-btn:hover {
+        background: #f6ed7a;
+        color: #6168ea;
+        transform: scale(1.06);
+      }
+
+      .video-time {
+        color: #ffffff;
+        font-size: 1vw;
+        font-family: Arial, sans-serif;
+        min-width: 3vw;
+        text-align: center;
+        font-weight: 700;
+      }
+
+      .video-progress {
+        flex: 1;
+        height: 0.45vw;
+        cursor: pointer;
+        pointer-events: auto;
+        accent-color: #f6ed7a;
+      }
+
+      .video-progress::-webkit-slider-runnable-track {
+        height: 0.45vw;
+        border-radius: 5vw;
+        background: rgba(255, 255, 255, 0.6);
+      }
+
+      .video-progress::-webkit-slider-thumb {
+        width: 1vw;
+        height: 1vw;
+        margin-top: -0.28vw;
+        border-radius: 50%;
+        background: #f6ed7a;
+        border: 0.15vw solid #ffffff;
+        cursor: pointer;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      .video-progress::-moz-range-track {
+        height: 0.45vw;
+        border-radius: 5vw;
+        background: rgba(255, 255, 255, 0.6);
+      }
+
+      .video-progress::-moz-range-thumb {
+        width: 1vw;
+        height: 1vw;
+        border-radius: 50%;
+        background: #f6ed7a;
+        border: 0.15vw solid #ffffff;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="home-button home-btn" href="index.html">
+      <img src="./assets/images/home-btn.png" alt="" />
+    </a>
+
+    <div class="page-title">
+      <span data-lang-key="title-1"></span>
+    </div>
+
+    <div class="video-btn">
+      <button class="start-video-btn" type="button">
+        <span class="play-circle">
+          <i class="fa-solid fa-play"></i>
+        </span>
+        <span>START</span>
+      </button>
+    </div>
+
+    <div class="language-container">
+      <div class="english active">E</div>
+      <div class="hindi">H</div>
+      <div class="gujrati">G</div>
+    </div>
+
+    <div class="video-popup">
+      <div class="video-blur-bg"></div>
+
+      <button class="video-close-btn" type="button">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="popup-video-box">
+        <video
+          class="popup-video"
+          src="./assets/videos/video.webm"
+          playsinline
+        ></video>
+
+        <div class="video-click-layer"></div>
+
+        <div class="custom-video-controls">
+          <button class="custom-play-btn" type="button">
+            <i class="fa-solid fa-play"></i>
+          </button>
+
+          <span class="video-time current-time">0:00</span>
+
+          <input
+            type="range"
+            class="video-progress"
+            min="0"
+            max="100"
+            value="0"
+            tabindex="-1"
+            aria-disabled="true"
+          />
+
+          <span class="video-time total-time">0:00</span>
+
+          <button class="zoom-btn" type="button">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <div class="left-container">
+        <div class="pages">
+          <a class="page page-1" href="topic-1.html" data-lang-key="num-1"></a>
+          <a class="page page-2" href="topic-2.html" data-lang-key="num-2"></a>
+          <a class="page page-3" href="topic-3.html" data-lang-key="num-3"></a>
+        </div>
+
+        <div class="swiper text-swiper">
+          <!-- slides are rendered from topicPoints[1] in assets/js/data.js -->
+          <div class="swiper-wrapper"></div>
+        </div>
+
+        <div class="custom-nav">
+          <button class="swiper-ctrl-prev hidden" type="button">
+            <i class="fa-solid fa-chevron-left icon-default"></i>
+            <i class="fa-solid fa-angles-left icon-hover"></i>
+          </button>
+
+          <button class="swiper-ctrl-next" type="button">
+            <i class="fa-solid fa-chevron-right icon-default"></i>
+            <i class="fa-solid fa-angles-right icon-hover"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="right-container">
+        <div class="swiper video-swiper">
+          <!-- slides are rendered from topicPoints[1] in assets/js/data.js -->
+          <div class="swiper-wrapper"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Swiper JS -->
+    <script src="./assets/js/swiper-bundle.min.js"></script>
+    <script src="./assets/js/djp.js"></script>
+    <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/app.js"></script>
+
+    <script>
+      const swiperPrevBtn = document.querySelector(".swiper-ctrl-prev");
+      const swiperNextBtn = document.querySelector(".swiper-ctrl-next");
+
+      const startVideoBtn = document.querySelector(".start-video-btn");
+      const startVideoIcon = document.querySelector(".start-video-btn i");
+      const videoPopup = document.querySelector(".video-popup");
+      const videoCloseBtn = document.querySelector(".video-close-btn");
+
+      const popupVideoBox = document.querySelector(".popup-video-box");
+      const popupVideo = document.querySelector(".popup-video");
+      const videoClickLayer = document.querySelector(".video-click-layer");
+
+      const customPlayBtn = document.querySelector(".custom-play-btn");
+      const customPlayIcon = document.querySelector(".custom-play-btn i");
+
+      const zoomBtn = document.querySelector(".zoom-btn");
+      const zoomIcon = document.querySelector(".zoom-btn i");
+
+      const progressBar = document.querySelector(".video-progress");
+      const currentTimeText = document.querySelector(".current-time");
+      const totalTimeText = document.querySelector(".total-time");
+
+      let maxWatchedTime = 0;
+
+      renderTopicPoints(1);
+
+      const textSwiper = new Swiper(".text-swiper", {
+        effect: "fade",
+        fadeEffect: {
+          crossFade: true,
+        },
+        allowTouchMove: false,
+        speed: 800,
+      });
+
+      const videoSwiper = new Swiper(".video-swiper", {
+        effect: "slide",
+        speed: 800,
+        allowTouchMove: false,
+        on: {
+          init: function () {
+            textSwiper.slideTo(this.activeIndex, 0);
+            handleVideoPlayback(this.activeIndex);
+            updateNavButtons(this);
+          },
+
+          slideChange: function () {
+            textSwiper.slideTo(this.activeIndex, 800);
+            handleVideoPlayback(this.activeIndex);
+            updateNavButtons(this);
+          },
+        },
+      });
+
+      swiperPrevBtn.addEventListener("click", () => {
+        if (!videoSwiper.isBeginning) {
+          videoSwiper.slidePrev();
+        }
+      });
+
+      swiperNextBtn.addEventListener("click", () => {
+        if (!videoSwiper.isEnd) {
+          videoSwiper.slideNext();
+        }
+      });
+
+      function handleVideoPlayback(activeIndex) {
+        const allVideos = document.querySelectorAll(".video-swiper video");
+
+        allVideos.forEach((video, index) => {
+          video.pause();
+          video.currentTime = 0;
+
+          if (index === activeIndex) {
+            video.play().catch(() => {});
+          }
+        });
+      }
+
+      function updateNavButtons(swiper) {
+        if (swiper.isBeginning) {
+          swiperPrevBtn.classList.add("hidden");
+        } else {
+          swiperPrevBtn.classList.remove("hidden");
+        }
+
+        if (swiper.isEnd) {
+          swiperNextBtn.classList.add("hidden");
+        } else {
+          swiperNextBtn.classList.remove("hidden");
+        }
+      }
+
+      function updatePlayIcons(isPlaying) {
+        if (isPlaying) {
+          customPlayIcon.classList.remove("fa-play");
+          customPlayIcon.classList.add("fa-pause");
+
+          startVideoIcon.classList.remove("fa-play");
+          startVideoIcon.classList.add("fa-pause");
+        } else {
+          customPlayIcon.classList.remove("fa-pause");
+          customPlayIcon.classList.add("fa-play");
+
+          startVideoIcon.classList.remove("fa-pause");
+          startVideoIcon.classList.add("fa-play");
+        }
+      }
+
+      function openPopupVideo() {
+        videoPopup.classList.add("active");
+
+        popupVideo.currentTime = 0;
+        maxWatchedTime = 0;
+        progressBar.value = 0;
+        currentTimeText.textContent = "0:00";
+
+        if (popupVideo.readyState >= 1) {
+          popupVideo.play().catch(() => {});
+        } else {
+          popupVideo.addEventListener(
+            "loadedmetadata",
+            () => {
+              popupVideo.currentTime = 0;
+              maxWatchedTime = 0;
+              popupVideo.play().catch(() => {});
+            },
+            { once: true },
+          );
+        }
+
+        updatePlayIcons(true);
+      }
+
+      function closePopupVideo() {
+        videoPopup.classList.remove("active");
+
+        popupVideo.pause();
+        popupVideo.currentTime = 0;
+        maxWatchedTime = 0;
+
+        progressBar.value = 0;
+        currentTimeText.textContent = "0:00";
+
+        popupVideoBox.classList.remove("zoomed");
+
+        zoomIcon.classList.remove("fa-compress");
+        zoomIcon.classList.add("fa-expand");
+
+        updatePlayIcons(false);
+      }
+
+      function toggleVideoPlayPause() {
+        if (popupVideo.paused) {
+          popupVideo.play().catch(() => {});
+          updatePlayIcons(true);
+        } else {
+          popupVideo.pause();
+          updatePlayIcons(false);
+        }
+      }
+
+      function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60)
+          .toString()
+          .padStart(2, "0");
+
+        return `${minutes}:${seconds}`;
+      }
+
+      function updateProgress() {
+        const current = popupVideo.currentTime;
+        const duration = popupVideo.duration;
+
+        if (duration > 0) {
+          progressBar.value = (current / duration) * 100;
+          currentTimeText.textContent = formatTime(current);
+          totalTimeText.textContent = formatTime(duration);
+
+          if (!popupVideo.seeking) {
+            maxWatchedTime = Math.max(maxWatchedTime, current);
+          }
+        }
+      }
+
+      function seekVideoBackwardOnly() {
+        const duration = popupVideo.duration;
+
+        if (!duration || duration <= 0) return;
+
+        const requestedTime = (Number(progressBar.value) / 100) * duration;
+
+        if (requestedTime <= maxWatchedTime) {
+          popupVideo.currentTime = requestedTime;
+        } else {
+          popupVideo.currentTime = maxWatchedTime;
+          progressBar.value = (maxWatchedTime / duration) * 100;
+        }
+      }
+
+      startVideoBtn.addEventListener("click", openPopupVideo);
+      customPlayBtn.addEventListener("click", toggleVideoPlayPause);
+      videoClickLayer.addEventListener("click", toggleVideoPlayPause);
+      videoCloseBtn.addEventListener("click", closePopupVideo);
+
+      videoPopup.addEventListener("click", (e) => {
+        if (
+          e.target === videoPopup ||
+          e.target.classList.contains("video-blur-bg")
+        ) {
+          closePopupVideo();
+        }
+      });
+
+      popupVideo.addEventListener("timeupdate", updateProgress);
+
+      popupVideo.addEventListener("loadedmetadata", () => {
+        totalTimeText.textContent = formatTime(popupVideo.duration);
+      });
+
+      popupVideo.addEventListener("play", () => {
+        updatePlayIcons(true);
+      });
+
+      popupVideo.addEventListener("pause", () => {
+        updatePlayIcons(false);
+      });
+
+      popupVideo.addEventListener("ended", () => {
+        updatePlayIcons(false);
+        progressBar.value = 100;
+      });
+
+      progressBar.addEventListener("input", seekVideoBackwardOnly);
+      progressBar.addEventListener("change", seekVideoBackwardOnly);
+
+      progressBar.addEventListener("keydown", (e) => {
+        const forwardKeys = ["ArrowRight", "ArrowUp", "PageUp", "End"];
+
+        if (forwardKeys.includes(e.key)) {
+          e.preventDefault();
+        }
+      });
+
+      zoomBtn.addEventListener("click", () => {
+        popupVideoBox.classList.toggle("zoomed");
+
+        if (popupVideoBox.classList.contains("zoomed")) {
+          zoomIcon.classList.remove("fa-expand");
+          zoomIcon.classList.add("fa-compress");
+        } else {
+          zoomIcon.classList.remove("fa-compress");
+          zoomIcon.classList.add("fa-expand");
+        }
+      });
+    </script>
+  </body>
+</html>

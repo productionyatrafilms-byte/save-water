@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-lang-key="pranam"></title>
+    <link rel="stylesheet" href="./fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <style>
+      .language-container {
+  position: fixed;
+  top: 3vw;
+  right: 3%;
+  display: flex;
+  width: 9vw;
+  padding: 0.2vw 0.3vw;
+  height: auto;
+  justify-content: space-between;
+  align-items: center;
+  border: 0.3vw solid transparent;
+  background-color: white;
+  border-radius: 50vw;
+  pointer-events: auto;
+  z-index: 1000;
+  opacity: 1;
+}
+
+      .language-container div {
+        width: 2.5vw;
+        height: 2.5vw;
+        font-size: 1.6vw;
+        text-align: center;
+        border: 0.3vw solid #1c6152;
+        background: transparent !important;
+        color: #1c6152;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+      }
+
+      .language-container div:hover {
+        background-color: #1c6152 !important;
+        color: white;
+      }
+
+      .language-container div.active {
+        background-color: #1c6152 !important;
+        color: white;
+      }
+
+      /* djp.js injects a close-button link in the top-right corner on every
+         page it runs on; not wanted here */
+      .back-button {
+        display: none !important;
+      }
+
+      /* a self-contained circular video card: fixed size, its own white
+         backdrop, and feathered edges so it blends into the frame's white
+         circle underneath instead of being hard-cropped against it */
+      .pranam-video {
+        position: absolute;
+        left: 50%;
+        top: 49%;
+        transform: translate(-50%, -50%);
+        width: 28vw;
+        height: 28vw;
+        border-radius: 50%;
+        background-color: #f6f6f6;
+        background-image: url("./assets/images/pranam-bg-1.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        padding-right: 2.5vw;
+      }
+
+      .pranam-video video {
+        width: 90%;
+        height: 83%;
+        object-fit: cover;
+
+        -webkit-mask-image:
+          linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0, 0, 0, 0.8) 2%,
+            rgba(0, 0, 0, 0.95) 4%,
+            black 6%,
+            black 90%,
+            rgba(0, 0, 0, 0.95) 96%,
+            rgba(0, 0, 0, 0.8) 98%,
+            transparent 100%
+          ),
+          linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.8) 2%,
+            rgba(0, 0, 0, 0.95) 4%,
+            black 6%,
+            black 90%,
+            rgba(0, 0, 0, 0.95) 96%,
+            rgba(0, 0, 0, 0.8) 98%,
+            transparent 100%
+          );
+        -webkit-mask-composite: source-in;
+
+        mask-image:
+          linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0, 0, 0, 0.8) 2%,
+            rgba(0, 0, 0, 0.95) 4%,
+            black 6%,
+            black 90%,
+            rgba(0, 0, 0, 0.95) 96%,
+            rgba(0, 0, 0, 0.8) 98%,
+            transparent 100%
+          ),
+          linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.8) 2%,
+            rgba(0, 0, 0, 0.95) 4%,
+            black 6%,
+            black 90%,
+            rgba(0, 0, 0, 0.95) 96%,
+            rgba(0, 0, 0, 0.8) 98%,
+            transparent 100%
+          );
+        mask-composite: intersect;
+
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="index.html?topic=3" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i>
+    </a>
+
+    <div class="language-container">
+      <div class="english active">E</div>
+      <div class="hindi">H</div>
+      <div class="gujrati">G</div>
+    </div>
+
+    <div class="pranam-container">
+      <div class="pranam-img">
+        <div class="pranam-video">
+          <video
+            src="./assets/videos/pranam.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
+        </div>
+        <span data-lang-key="pranam"></span>
+        <img src="./assets/images/pranam-img.png" alt="" />
+      </div>
+
+      <a href="index.html" class="home-btn-1">
+        <span data-lang-key="home"></span>
+        <img src="./assets/images/home-btn-1.png" alt="" />
+      </a>
+    </div>
+
+    <script src="./assets/js/djp.js"></script>
+    <script src="./assets/js/data.js"></script>
+
+    <script>
+      (function () {
+        "use strict";
+
+        const btnEn = document.querySelector(".english");
+        const btnHi = document.querySelector(".hindi");
+        const btnGu = document.querySelector(".gujrati");
+
+        const backBtn = document.querySelector(".back-btn");
+        const homeBtn1 = document.querySelector(".home-btn-1");
+
+        const DEFAULT_LANG = "English";
+        const STORAGE_LANG_KEY = "selectedLanguage";
+
+        // translations come from assets/js/data.js, which must be loaded first
+        let translations =
+          typeof translationsData !== "undefined" ? translationsData : {};
+
+        /* ==================================================
+           AUDIO
+        =================================================== */
+
+        const AUDIO_PATH = "./assets/audio/";
+
+        // longest a nav sound is allowed to hold the page before leaving
+        const MAX_NAV_WAIT = 1200;
+
+        const SFX = {
+          pranam: new Audio(`${AUDIO_PATH}pranam.mp3`),
+          home: new Audio(`${AUDIO_PATH}-1.mp3`),
+          pop: new Audio(`${AUDIO_PATH}pop.mp3`),
+        };
+
+        const LANG_SFX = {
+          English: new Audio(`${AUDIO_PATH}Eng.mpeg`),
+          Hindi: new Audio(`${AUDIO_PATH}Hin.mpeg`),
+          Gujarati: new Audio(`${AUDIO_PATH}Guj.mpeg`),
+        };
+
+        Object.values(SFX).forEach((audio) => {
+          audio.preload = "auto";
+        });
+
+        Object.values(LANG_SFX).forEach((audio) => {
+          audio.preload = "auto";
+        });
+
+        function playLangSound(lang) {
+          const audio = LANG_SFX[lang];
+          if (!audio) return;
+          audio.currentTime = 0;
+          audio.play().catch(() => {});
+        }
+
+        let pranamHasPlayed = false;
+
+        // play the page load sound once and never again
+        function playPranamOnce() {
+          if (pranamHasPlayed) return;
+          pranamHasPlayed = true;
+
+          const playPromise = SFX.pranam.play();
+          if (playPromise !== undefined) {
+            playPromise.catch((err) => {
+              // browser blocked autoplay, so retry on the first real interaction
+              pranamHasPlayed = false;
+              console.warn("pranam audio blocked, waiting for interaction:", err);
+              waitForInteraction();
+            });
+          }
+        }
+
+        function waitForInteraction() {
+          const trigger = () => {
+            document.removeEventListener("click", trigger);
+            document.removeEventListener("keydown", trigger);
+            document.removeEventListener("touchstart", trigger);
+            playPranamOnce();
+          };
+
+          document.addEventListener("click", trigger, { once: true });
+          document.addEventListener("keydown", trigger, { once: true });
+          document.addEventListener("touchstart", trigger, { once: true });
+        }
+
+        // play a sound, then leave the page once it finishes or the cap is hit
+        function playThenNavigate(name, url) {
+          const audio = SFX[name];
+
+          if (!audio) {
+            window.location.href = url;
+            return;
+          }
+
+          SFX.pranam.pause();
+
+          let navigated = false;
+
+          const go = () => {
+            if (navigated) return;
+            navigated = true;
+            window.location.href = url;
+          };
+
+          audio.currentTime = 0;
+          audio.addEventListener("ended", go, { once: true });
+
+          const playPromise = audio.play();
+          if (playPromise !== undefined) {
+            playPromise.catch((err) => {
+              console.warn(`Could not play ${name} audio:`, err);
+              go();
+            });
+          }
+
+          setTimeout(go, MAX_NAV_WAIT);
+        }
+
+        /* ==================================================
+           LANGUAGE
+        =================================================== */
+
+        function getSavedLanguage() {
+          return localStorage.getItem(STORAGE_LANG_KEY) || DEFAULT_LANG;
+        }
+
+        function saveLanguage(lang) {
+          localStorage.setItem(STORAGE_LANG_KEY, lang);
+        }
+
+        function setActiveButton(activeBtn) {
+          [btnEn, btnHi, btnGu].forEach((btn) => {
+            if (btn) btn.classList.remove("active");
+          });
+
+          if (activeBtn) activeBtn.classList.add("active");
+        }
+
+        function applyLanguage(lang) {
+          const langData = translations[lang];
+
+          if (lang === "English") {
+            document.body.setAttribute("data-lang", "en");
+            setActiveButton(btnEn);
+          } else if (lang === "Hindi") {
+            document.body.setAttribute("data-lang", "hi");
+            setActiveButton(btnHi);
+          } else if (lang === "Gujarati") {
+            document.body.setAttribute("data-lang", "gu");
+            setActiveButton(btnGu);
+          }
+
+          saveLanguage(lang);
+          document.documentElement.lang = lang;
+
+          if (!langData) return;
+
+          document.querySelectorAll("[data-lang-key]").forEach((el) => {
+            const key = el.getAttribute("data-lang-key");
+            if (langData[key] !== undefined) {
+              el.innerHTML = String(langData[key]).replace(/\n/g, "<br>");
+            }
+          });
+        }
+
+        /* ==================================================
+           PAGE LOAD
+        =================================================== */
+
+        window.addEventListener("DOMContentLoaded", () => {
+          playPranamOnce();
+          applyLanguage(getSavedLanguage());
+
+          if (!Object.keys(translations).length) {
+            console.error(
+              "Translations not loaded: include assets/js/data.js before this script",
+            );
+          }
+        });
+
+        /* ==================================================
+           EVENTS
+        =================================================== */
+
+        if (btnEn) {
+          btnEn.addEventListener("click", () => {
+            playLangSound("English");
+            applyLanguage("English");
+          });
+        }
+
+        if (btnHi) {
+          btnHi.addEventListener("click", () => {
+            playLangSound("Hindi");
+            applyLanguage("Hindi");
+          });
+        }
+
+        if (btnGu) {
+          btnGu.addEventListener("click", () => {
+            playLangSound("Gujarati");
+            applyLanguage("Gujarati");
+          });
+        }
+
+        if (backBtn) {
+          backBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            playThenNavigate("pop", backBtn.getAttribute("href"));
+          });
+        }
+
+        if (homeBtn1) {
+          homeBtn1.addEventListener("click", (e) => {
+            e.preventDefault();
+            playThenNavigate("home", homeBtn1.getAttribute("href"));
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

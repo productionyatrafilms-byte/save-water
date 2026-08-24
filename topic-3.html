@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-lang-key="title-3"></title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="./fontawesome/css/all.min.css" />
+
+    <style>
+      .language-container {
+        position: fixed;
+        top: 3vw;
+        right: 3%;
+        display: flex;
+        width: 9vw;
+        padding: 0.2vw 0.3vw;
+        height: auto;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "BalooRegular";
+        border: 0.3vw solid white;
+        background-color: transparent;
+        border-radius: 50vw;
+        pointer-events: auto;
+        z-index: 1000;
+      }
+
+      .left-container {
+        width: 60%;
+        height: 100%;
+        padding-left: 9vw;
+        position: relative;
+      }
+
+      .right-container {
+        width: 40%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="home-button home-btn" href="index.html">
+      <img src="./assets/images/home-btn.png" alt="" />
+    </a>
+
+    <div class="page-title">
+      <span data-lang-key="title-3"></span>
+    </div>
+
+    <!-- nav-container -->
+    <div class="language-container">
+      <div class="english active">E</div>
+      <div class="hindi">H</div>
+      <div class="gujrati">G</div>
+    </div>
+
+    <main>
+      <div class="left-container">
+        <div class="pages">
+          <a class="page page-1" href="topic-1.html" data-lang-key="num-1"></a>
+          <a class="page page-2" href="topic-2.html" data-lang-key="num-2"></a>
+          <a class="page page-3" href="topic-3.html" data-lang-key="num-3"></a>
+        </div>
+
+        <div class="swiper text-swiper">
+          <!-- slides are rendered from topicPoints[3] in assets/js/data.js -->
+          <div class="swiper-wrapper"></div>
+        </div>
+
+        <div class="custom-nav">
+          <button class="swiper-ctrl-prev hidden" type="button">
+            <i class="fa-solid fa-chevron-left icon-default"></i>
+            <i class="fa-solid fa-angles-left icon-hover"></i>
+          </button>
+
+          <button class="swiper-ctrl-next" type="button">
+            <i class="fa-solid fa-chevron-right icon-default"></i>
+            <i class="fa-solid fa-angles-right icon-hover"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="right-container">
+        <div class="swiper video-swiper">
+          <!-- slides are rendered from topicPoints[3] in assets/js/data.js -->
+          <div class="swiper-wrapper"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Swiper JS -->
+    <script src="./assets/js/swiper-bundle.min.js"></script>
+    <script src="./assets/js/djp.js"></script>
+    <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/app.js"></script>
+
+    <script>
+      const prevBtn = document.querySelector(".swiper-ctrl-prev");
+      const nextBtn = document.querySelector(".swiper-ctrl-next");
+
+      renderTopicPoints(3);
+
+      const textSwiper = new Swiper(".text-swiper", {
+        effect: "fade",
+        fadeEffect: {
+          crossFade: true,
+        },
+        allowTouchMove: false,
+        speed: 800,
+      });
+
+      const videoSwiper = new Swiper(".video-swiper", {
+        effect: "slide",
+        speed: 800,
+        allowTouchMove: false,
+        on: {
+          init: function () {
+            textSwiper.slideTo(this.activeIndex);
+            handleVideoPlayback(this.activeIndex);
+            updateNavButtons(this);
+          },
+          slideChange: function () {
+            textSwiper.slideTo(this.activeIndex);
+            handleVideoPlayback(this.activeIndex);
+            updateNavButtons(this);
+          },
+        },
+      });
+
+      function handleVideoPlayback(activeIndex) {
+        const allVideos = document.querySelectorAll(".video-swiper video");
+
+        allVideos.forEach((video, index) => {
+          video.pause();
+          video.currentTime = 0;
+
+          if (index === activeIndex) {
+            video.play().catch(() => {});
+          }
+        });
+      }
+
+      function updateNavButtons(swiper) {
+        if (swiper.activeIndex === 0) {
+          prevBtn.classList.add("hidden");
+        } else {
+          prevBtn.classList.remove("hidden");
+        }
+
+        /* next button should always stay visible */
+        nextBtn.classList.remove("hidden");
+      }
+
+      prevBtn.addEventListener("click", function () {
+        if (videoSwiper.activeIndex > 0) {
+          videoSwiper.slidePrev();
+        }
+      });
+
+      nextBtn.addEventListener("click", function () {
+        const lastIndex = videoSwiper.slides.length - 1;
+
+        if (videoSwiper.activeIndex === lastIndex) {
+          window.location.href = "pranam.html";
+        } else {
+          videoSwiper.slideNext();
+        }
+      });
+    </script>
+  </body>
+</html>
