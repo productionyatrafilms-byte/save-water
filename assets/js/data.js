@@ -28,7 +28,8 @@ const translationsData = {
     "num-3": "3",
     "num-4": "4",
     "home": "Home",
-    "pranam": "Pranam"
+    "pranam": "Pranam",
+    "click": "Click"
   },
 
   // ----------------------------------------------------
@@ -47,7 +48,8 @@ const translationsData = {
     "num-3": "३",
     "num-4": "४",
     "home": "घर",
-    "pranam": "प्रणाम"
+    "pranam": "प्रणाम",
+    "click": "क्लिक करें"
   },
 
   // ----------------------------------------------------
@@ -66,7 +68,8 @@ const translationsData = {
     "num-3": "૩",
     "num-4": "૪",
     "home": "ઘર",
-    "pranam": "પ્રણામ"
+    "pranam": "પ્રણામ",
+    "click": "ક્લિક કરો"
   }
 };
 

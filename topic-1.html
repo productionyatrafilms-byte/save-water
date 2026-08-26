@@ -60,6 +60,18 @@
         bottom: 4vw;
         left: 3vw;
         z-index: 10000;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+
+      .video-btn.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
       }
 
       .start-video-btn {
@@ -410,6 +422,7 @@
       const swiperPrevBtn = document.querySelector(".swiper-ctrl-prev");
       const swiperNextBtn = document.querySelector(".swiper-ctrl-next");
 
+      const videoBtnWrap = document.querySelector(".video-btn");
       const startVideoBtn = document.querySelector(".start-video-btn");
       const startVideoIcon = document.querySelector(".start-video-btn i");
       const videoPopup = document.querySelector(".video-popup");
@@ -497,6 +510,16 @@
           swiperNextBtn.classList.add("hidden");
         } else {
           swiperNextBtn.classList.remove("hidden");
+        }
+
+        if (swiper.activeIndex === 0) {
+          videoBtnWrap.classList.remove("hidden");
+        } else {
+          videoBtnWrap.classList.add("hidden");
+
+          if (videoPopup.classList.contains("active")) {
+            closePopupVideo();
+          }
         }
       }
 

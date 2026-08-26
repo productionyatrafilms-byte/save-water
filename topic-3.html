@@ -49,6 +49,11 @@
       <img src="./assets/images/home-btn.png" alt="" />
     </a>
 
+    <a href="pranam.html" class="pranam-link hidden">
+      <img src="./assets/images/arowAsset.png" alt="" />
+      <span data-lang-key="pranam"></span>
+    </a>
+
     <div class="page-title">
       <span data-lang-key="title-3"></span>
     </div>
@@ -103,6 +108,7 @@
     <script>
       const prevBtn = document.querySelector(".swiper-ctrl-prev");
       const nextBtn = document.querySelector(".swiper-ctrl-next");
+      const pranamLink = document.querySelector(".pranam-link");
 
       renderTopicPoints(3);
 
@@ -153,8 +159,15 @@
           prevBtn.classList.remove("hidden");
         }
 
-        /* next button should always stay visible */
-        nextBtn.classList.remove("hidden");
+        const lastIndex = swiper.slides.length - 1;
+
+        if (swiper.activeIndex === lastIndex) {
+          nextBtn.classList.add("hidden");
+          pranamLink?.classList.remove("hidden");
+        } else {
+          nextBtn.classList.remove("hidden");
+          pranamLink?.classList.add("hidden");
+        }
       }
 
       prevBtn.addEventListener("click", function () {
@@ -166,9 +179,7 @@
       nextBtn.addEventListener("click", function () {
         const lastIndex = videoSwiper.slides.length - 1;
 
-        if (videoSwiper.activeIndex === lastIndex) {
-          window.location.href = "pranam.html";
-        } else {
+        if (videoSwiper.activeIndex < lastIndex) {
           videoSwiper.slideNext();
         }
       });
