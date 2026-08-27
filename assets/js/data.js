@@ -20,9 +20,8 @@ const translationsData = {
     "save": "Save",
     "water": "Water",
     "title-1": "Uses of Water",
-    "title-2": "How can we SAVE WATER",
-    "title-3": "Why should we SAVE WATER",
-    "title-4": "How to say Sorry",
+    "title-2": "How can we SAVE WATER?",
+    "title-3": "Why should we SAVE WATER?",
     "num-1": "1",
     "num-2": "2",
     "num-3": "3",
@@ -40,9 +39,8 @@ const translationsData = {
     "save": "बचाएँ",
     "water": "पानी",
     "title-1": "पानी की उपयोगिता",
-    "title-2": "हम पानी कैसे बचा सकते हैं",
-    "title-3": "हमें पानी क्यों बचाना चाहिए",
-    "title-4": "माफी माँगना सीखें",
+    "title-2": "हम पानी कैसे बचा सकते हैं?",
+    "title-3": "हमें पानी क्यों बचाना चाहिए?",
     "num-1": "१",
     "num-2": "२",
     "num-3": "३",
@@ -60,9 +58,8 @@ const translationsData = {
     "save": "બચાવો",
     "water": "પાણી",
     "title-1": "પાણીનો ઉપયોગ",
-    "title-2": "આપણે પાણી કેવી રીતે બચાવી શકીએ",
-    "title-3": "આપણે પાણી શા માટે બચાવવું જોઈએ",
-    "title-4": "માફી માંગતા શીખો",
+    "title-2": "આપણે પાણીની બચત કેવી રીતે કરી શકીએ?",
+    "title-3": "આપણે પાણીની બચત શા માટે કરવી જોઈએ?",
     "num-1": "૧",
     "num-2": "૨",
     "num-3": "૩",
@@ -91,21 +88,31 @@ const translationsData = {
 const topicPoints = {
   1: [
     { id: 1, english: "For Drinking", hindi: "पीने के लिए", guj: "પીવા માટે" },
-    { id: 2, english: "For Cooking", hindi: "खाना बनाने के लिए", guj: "રસોઈ બનાવવા માટે" },
-    { id: 3, english: "For Brushing", hindi: "ब्रश करने के लिए", guj: "બ્રશ કરવા માટે" },
-    { id: 4, english: "For Bathing", hindi: "नहाने के लिए", guj: "નાહવા માટે" },
-    { id: 5, english: "For Washing Hands", hindi: "हाथ धोने के लिए", guj: "હાથ ધોવા માટે" },
-    { id: 6, english: "For Washing Clothes", hindi: "कपड़े धोने के लिए", guj: "કપડાં ધોવા માટે" },
-    { id: 7, english: "For Washing Car", hindi: "गाड़ी धोने के लिए", guj: "કાર ધોવા માટે" },
-    { id: 8, english: "For Washing Dishes", hindi: "बर्तन धोने के लिए", guj: "વાસણ ધોવા માટે" },
-    { id: 9, english: "For Washing Floors", hindi: "फर्श धोने के लिए", guj: "જમીન ધોવા માટે" },
-    { id: 10, english: "For Gardening", hindi: "बागवानी के लिए", guj: "બગીચા માટે" },
-    { id: 11, english: "For Toilet", hindi: "शौच के लिए", guj: "શૌચાલય માટે" },
+
+  { id: 2, english: "For Cooking", hindi: "खाना बनाने के लिए", guj: "રસોઈ બનાવવા માટે" },
+
+  { id: 3, english: "For Brushing", hindi: "ब्रश करने के लिए", guj: "બ્રશ કરવા માટે" },
+
+  { id: 4, english: "For Bathing", hindi: "नहाने के लिए", guj: "નાહવા માટે" },
+
+  { id: 5, english: "For Washing Hands", hindi: "हाथ धोने के लिए", guj: "હાથ ધોવા માટે" },
+
+  { id: 6, english: "For Washing Clothes", hindi: "कपड़े धोने के लिए", guj: "કપડાં ધોવા માટે" },
+
+  { id: 7, english: "For Washing Car", hindi: "गाड़ी धोने के लिए", guj: "કાર ધોવા માટે" },
+
+  { id: 8, english: "For Washing Dishes", hindi: "बर्तन धोने के लिए", guj: "વાસણ ધોવા માટે" },
+
+  { id: 9, english: "For Washing Floors", hindi: "फर्श धोने के लिए", guj: "જમીન ધોવા માટે" },
+
+  { id: 10, english: "For Gardening", hindi: "बागवानी के लिए", guj: "બગીચાના કામ માટે" },
+
+  { id: 11, english: "For Toilet", hindi: "शौचालय के लिए", guj: "શૌચાલય માટે" },
   ],
 
   2: [
     { id: 1, english: "Turn off the tap while brushing.", hindi: "ब्रश करते समय नल बंद कर दें।", guj: "બ્રશ કરતી વખતે નળ બંધ રાખો." },
-    { id: 2, english: "Always open the water tap at the minimum level necessary.", hindi: "नल को हमेशा आवश्यकतानुसार कम से कम खोलें।", guj: "નળ હંમેશા જરૂર મુજબ ઓછામાં ઓછું ખોલો." },
+    { id: 2, english: "Always open the water tap at the minimum level necessary.", hindi: "नल को हमेशा आवश्यकतानुसार \nकम से कम खोलें।", guj: "નળ હંમેશા જરૂર મુજબ \nઓછામાં ઓછું ખોલો." },
     { id: 3, english: "Ensure to close the tap properly.", hindi: "नल को पूरी तरह से बंद जरूर करें।", guj: "નળ સરખી રીતે બંધ કરો." },
     { id: 4, english: "Use a bucket to take a bath instead of a shower / bath tub.", hindi: "नहाने के लिए शावर / बाथ-टब के बदले बाल्टी का इस्तेमाल करें।", guj: "નહાવા માટે શાવર / બાથટબને બદલે ડોલનો ઉપયોગ કરો." },
     { id: 5, english: "Avoid soap, shampoo at least once a week.", hindi: "हफ्ते में कम से कम एक दिन साबुन-शैम्पू का इस्तेमाल ना करें।", guj: "અઠવાડિયામાં ઓછામાં ઓછો એક દિવસ સાબુ-શેમ્પૂનો ઉપયોગ ન કરો." },
