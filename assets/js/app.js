@@ -3,6 +3,7 @@ const btnHi = document.querySelector(".hindi");
 const btnGu = document.querySelector(".gujrati");
 
 const DEFAULT_LANG = "English";
+const LANG_KEY = "selectedLanguage";
 
 // translations come from assets/js/data.js, which must be loaded first
 let translations = typeof translationsData !== "undefined" ? translationsData : {};
@@ -53,6 +54,8 @@ function applyLanguage(lang) {
       el.innerHTML = String(langData[key]).replace(/\n/g, "<br>");
     }
   });
+
+  localStorage.setItem(LANG_KEY, lang);
 }
 
 /* ===== render topic points from data ===== */
@@ -103,7 +106,7 @@ function renderTopicPoints(topicNumber) {
     .map(
       (point) =>
         `<div class="swiper-slide">` +
-        `<video muted playsinline preload="metadata">` +
+        `<video muted playsinline loop preload="metadata">` +
         `<source src="./assets/videos/${topicNumber}-${point.id}.mp4" type="video/mp4" />` +
         `</video>` +
         `</div>`,
@@ -184,7 +187,7 @@ function wireClickSounds() {
   });
 }
 
-// always load English on refresh/page load
+// restore the previously selected language on page load
 window.addEventListener("DOMContentLoaded", () => {
   setActivePage();
   wireClickSounds();
@@ -194,7 +197,8 @@ window.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  applyLanguage(DEFAULT_LANG); // always reset to English
+  const savedLang = localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
+  applyLanguage(savedLang);
 });
 
 // button clicks

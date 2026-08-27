@@ -21,6 +21,22 @@
 }
 
 @font-face {
+  font-family: "ITFDevanagari";
+  src: url("../../fonts/ITFDevanagari-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ITFDevanagari";
+  src: url("../../fonts/ITFDevanagari-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "NotoSansGujaratiBold";
   src: url("../../fonts/NotoSansGujarati-Bold.ttf") format("truetype");
   font-weight: 700;
@@ -42,6 +58,11 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+body[data-lang="hi"] {
+  font-family: "ITFDevanagari" !important;
+  font-weight: 700 !important;
 }
 
 *,
@@ -102,6 +123,11 @@ body {
   transition: opacity 3s ease;
   transform: translateX(-50%);
   width: fit-content;
+}
+
+body[data-lang="hi"] .page-title span {
+  font-family: "ITFDevanagari" !important;
+  font-weight: 700 !important;
 }
 
 .page-title span {
@@ -204,6 +230,12 @@ main {
   font-family: "AbrilFatface";
 }
 
+body[data-lang="hi"] .left-container .title .save,
+body[data-lang="hi"] .left-container .title .water {
+  font-family: "ITFDevanagari" !important;
+  font-weight: 700 !important;
+}
+
 .right-container .nal {
   position: absolute;
   width: 22vw;
@@ -227,6 +259,11 @@ main {
   /* opacity: 0; */
   animation: dropMoveScale 1s ease-in-out forwards;
   animation-delay: 1.1s;
+}
+
+body[data-lang="hi"] .right-container .nal .drop span {
+  font-family: "ITFDevanagari" !important;
+  font-weight: 700 !important;
 }
 
 .right-container .nal .drop span {
@@ -337,6 +374,8 @@ body[data-lang="hi"] .topic-text {
   padding: 0.5vw 2.2vw;
   font-size: 2vw;
   line-height: 1.15;
+  font-family: "ITFDevanagari" !important;
+  font-weight: 700 !important;
 }
 
 /* Gujarati */
@@ -370,8 +409,9 @@ body[data-lang="gu"] .topic-text {
 body[data-lang="hi"] .num {
   padding: 0.5vw 2.2vw;
   font-size: 3vw;
-  font-weight: bolder !important;
+  font-weight: 700 !important;
   line-height: 1.15;
+  font-family: "ITFDevanagari" !important;
 }
 
 body[data-lang="gu"] .num {
@@ -474,12 +514,18 @@ body[data-lang="gu"] .num {
   flex-direction: column;
 }
 
+body[data-lang="hi"] .slide-text,
+body[data-lang="hi"] .sub-text {
+  font-family: "ITFDevanagari" !important;
+  font-weight: 700 !important;
+}
+
 .slide-text {
   width: 100%;
   color: white;
   font-family: "BalooRegular";
   font-size: 2.8vw;
-  line-height: 1;
+  line-height: 1.25;
   text-align: center;
 }
 
@@ -603,6 +649,11 @@ body[data-lang="gu"] .num {
   padding-right: 2vw;
 }
 
+body[data-lang="hi"] .pranam-link span {
+  font-family: "ITFDevanagari" !important;
+  font-weight: 700 !important;
+}
+
 @keyframes pranamPop {
   0%,
   100% {
@@ -675,6 +726,11 @@ body[data-lang="gu"] .num {
   color: #ffffff;
 }
 
+body[data-lang="hi"] .pranam-img span {
+  font-family: "ITFDevanagari" !important;
+  font-weight: 700 !important;
+}
+
 .pranam-container .home-btn-1 {
   position: absolute;
   top: 88%;
@@ -704,6 +760,11 @@ body[data-lang="gu"] .num {
   transform: translateY(-50%);
   font-family: "BalooRegular";
   color: white;
+}
+
+body[data-lang="hi"] .home-btn-1 span {
+  font-family: "ITFDevanagari" !important;
+  font-weight: 700 !important;
 }
 
 .back-btn {
