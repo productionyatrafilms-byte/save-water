@@ -134,7 +134,7 @@ const topicPoints = {
       id: 4,
       english: "There is a shortage of water in many parts of the world.",
       hindi: "दुनिया में कई जगह पानी की कमी है।",
-      guj: "વિશ્વમાં ઘણી જગ્યાએ પાણીની અછત છે.",
+      guj: "વિશ્વમાં ઘણી જગ્યાએ \nપાણીની અછત છે.",
       subEnglish: "",
       subHindi: "",
       subGuj: "",
