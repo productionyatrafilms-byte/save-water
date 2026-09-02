@@ -451,8 +451,6 @@
       const currentTimeText = document.querySelector(".current-time");
       const totalTimeText = document.querySelector(".total-time");
 
-      let maxWatchedTime = 0;
-
       renderTopicPoints(1);
 
       const textSwiper = new Swiper(".text-swiper", {
@@ -552,7 +550,6 @@
         videoPopup.classList.add("active");
 
         popupVideo.currentTime = 0;
-        maxWatchedTime = 0;
         progressBar.value = 0;
         currentTimeText.textContent = "0:00";
 
@@ -563,7 +560,6 @@
             "loadedmetadata",
             () => {
               popupVideo.currentTime = 0;
-              maxWatchedTime = 0;
               popupVideo.play().catch(() => {});
             },
             { once: true },
@@ -578,7 +574,6 @@
 
         popupVideo.pause();
         popupVideo.currentTime = 0;
-        maxWatchedTime = 0;
 
         progressBar.value = 0;
         currentTimeText.textContent = "0:00";
@@ -618,26 +613,15 @@
           progressBar.value = (current / duration) * 100;
           currentTimeText.textContent = formatTime(current);
           totalTimeText.textContent = formatTime(duration);
-
-          if (!popupVideo.seeking) {
-            maxWatchedTime = Math.max(maxWatchedTime, current);
-          }
         }
       }
 
-      function seekVideoBackwardOnly() {
+      function seekVideoToProgress() {
         const duration = popupVideo.duration;
 
         if (!duration || duration <= 0) return;
 
-        const requestedTime = (Number(progressBar.value) / 100) * duration;
-
-        if (requestedTime <= maxWatchedTime) {
-          popupVideo.currentTime = requestedTime;
-        } else {
-          popupVideo.currentTime = maxWatchedTime;
-          progressBar.value = (maxWatchedTime / duration) * 100;
-        }
+        popupVideo.currentTime = (Number(progressBar.value) / 100) * duration;
       }
 
       startVideoBtn.addEventListener("click", openPopupVideo);
@@ -673,16 +657,8 @@
         progressBar.value = 100;
       });
 
-      progressBar.addEventListener("input", seekVideoBackwardOnly);
-      progressBar.addEventListener("change", seekVideoBackwardOnly);
-
-      progressBar.addEventListener("keydown", (e) => {
-        const forwardKeys = ["ArrowRight", "ArrowUp", "PageUp", "End"];
-
-        if (forwardKeys.includes(e.key)) {
-          e.preventDefault();
-        }
-      });
+      progressBar.addEventListener("input", seekVideoToProgress);
+      progressBar.addEventListener("change", seekVideoToProgress);
 
       zoomBtn.addEventListener("click", () => {
         popupVideoBox.classList.toggle("zoomed");
