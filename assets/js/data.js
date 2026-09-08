@@ -127,7 +127,7 @@ const topicPoints = {
   ],
 
   3: [
-    { id: 1, english: "Bhagwan Mahavir preached that water has life and we should save lives.", hindi: "भगवान महावीर ने कहा है कि \nजल में जीव है और हमें \nजीवों की रक्षा करनी चाहिए।", guj: "ભગવાન મહાવીરે કહ્યું કે, પાણીમાં જીવ છે અને આપણે તે જીવોની રક્ષા કરવી જોઈએ." },
+    { id: 1, english: "Bhagwan Mahavir preached that water has life and we should save lives.", hindi: "भगवान महावीर ने कहा है कि \nजल में जीव है और हमें \nजीवों की रक्षा करनी चाहिए।", guj: "ભગવાન મહાવીરે કહ્યું છે કે, પાણીમાં જીવ છે અને આપણે તે જીવોની રક્ષા કરવી જોઈએ." },
     { id: 2, english: "Water is Important for the survival of all living beings.", hindi: "पानी सभी जीवों के अस्तित्व के लिए महत्वपूर्ण है।", guj: "પાણી તમામ જીવોના અસ્તિત્વ માટે જરૂરી છે." },
     { id: 3, english: "Only a limited amount of drinking water is available in the world.", hindi: "दुनिया में सीमित मात्रा में ही पीने योग्य पानी उपलब्ध है।", guj: "વિશ્વમાં માત્ર મર્યાદિત માત્રામાં જ પીવાલાયક પાણી ઉપલબ્ધ છે." },
     {
@@ -140,7 +140,7 @@ const topicPoints = {
       subGuj: "",
     },
     { id: 5, english: "Only 3% of the total water on Earth is fresh water.", hindi: "पृथ्वी पर उपलब्ध कुल पानी में से \nकेवल ३% पानी \nमीठा(स्वच्छ) पानी है।", guj: "પૃથ્વી પર ઉપલબ્ધ કુલ પાણીમાંથી માત્ર 3% પાણી જ મીઠું(શુદ્ધ) પાણી છે " },
-    { id: 6, english: "2.5% of the fresh water is locked up in glaciers, soil, and the atmosphere.", hindi: "२.५% मीठा(स्वच्छ) पानी ग्लेशियरों, मिट्टी और वायुमंडल में कैद है।", guj: "2.5% શુધ્ધ પાણી ગ્લેશિયર, માટી અને વાતાવરણમાં બંધાયેલું છે." },
+    { id: 6, english: "2.5% of the fresh water is locked up in glaciers, soil, and the atmosphere.", hindi: "२.५% स्वच्छ पानी ग्लेशियरों, मिट्टी और वायुमंडल में कैद है।", guj: "2.5% શુધ્ધ પાણી ગ્લેશિયર, માટી અને વાતાવરણમાં બંધાયેલું છે." },
     { id: 7, english: "Only 0.5% water is available for drinking", hindi: "केवल ०.५% स्वच्छ पानी ही पीने के लिए उपलब्ध है।", guj: "પીવા માટે માત્ર 0.5% શુધ્ધ પાણી ઉપલબ્ધ છે." },
     { id: 8, english: "“If there is water, \nthere is a future.”", hindi: "“जल है तो कल है”", guj: "“જો પાણી છે, તો ભવિષ્ય છે.”" },
   ],
