@@ -12,6 +12,7 @@
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="./fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/video-popup.css" />
 
   <style>
     .language-container {
@@ -109,9 +110,16 @@
   <script src="./assets/js/djp.js"></script>
   <script src="./assets/js/data.js"></script>
   <script src="./assets/js/app.js"></script>
+  <script src="./assets/js/video-popup.js"></script>
 
   <script>
     renderTopicPoints(2);
+
+    // "Do not splash water for fun." (point 8) has its own video.
+    const videoPopup = initVideoPopup({
+      src: "./assets/videos/v1.webm",
+      slideIndex: 7,
+    });
 
     const textSwiper = new Swiper(".text-swiper", {
       effect: "fade",
@@ -160,6 +168,8 @@
     function updateNavButtons(swiper) {
       const prevBtn = document.querySelector(".swiper-ctrl-prev");
       const nextBtn = document.querySelector(".swiper-ctrl-next");
+
+      videoPopup.sync(swiper.activeIndex);
 
       if (swiper.isBeginning) {
         prevBtn.classList.add("hidden");

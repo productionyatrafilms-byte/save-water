@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="./fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/css/video-popup.css" />
 
     <style>
       .language-container {
@@ -113,6 +114,7 @@
     <script src="./assets/js/djp.js"></script>
     <script src="./assets/js/data.js"></script>
     <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/video-popup.js"></script>
 
     <script>
       const prevBtn = document.querySelector(".swiper-ctrl-prev");
@@ -120,6 +122,12 @@
       const pranamLink = document.querySelector(".pranam-link");
 
       renderTopicPoints(3);
+
+      // "If there is water, there is a future." (point 8) has its own video.
+      const videoPopup = initVideoPopup({
+        src: "./assets/videos/v2.webm",
+        slideIndex: 7,
+      });
 
       const textSwiper = new Swiper(".text-swiper", {
         effect: "fade",
@@ -162,6 +170,8 @@
       }
 
       function updateNavButtons(swiper) {
+        videoPopup.sync(swiper.activeIndex);
+
         if (swiper.activeIndex === 0) {
           prevBtn.classList.add("hidden");
         } else {
