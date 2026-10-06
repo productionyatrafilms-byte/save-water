@@ -52,14 +52,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: BarlowCondensedBold;
-  src: url("../../fonts/BarlowCondensed-ExtraBold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 body[data-lang="hi"] {
   font-family: "ITFDevanagari" !important;
   font-weight: 700 !important;
