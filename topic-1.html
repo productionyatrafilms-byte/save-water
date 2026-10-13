@@ -348,6 +348,7 @@
         <video
           class="popup-video"
           src="./assets/videos/video.webm"
+          preload="none"
           playsinline
         ></video>
 
@@ -424,7 +425,6 @@
 
     <!-- Swiper JS -->
     <script src="./assets/js/swiper-bundle.min.js"></script>
-    <script src="./assets/js/djp.js"></script>
     <script src="./assets/js/data.js"></script>
     <script src="./assets/js/app.js"></script>
 
@@ -500,8 +500,11 @@
         allVideos.forEach((video, index) => {
           video.pause();
           video.currentTime = 0;
+          // inactive slides must not download until their slide is reached
+          video.preload = "none";
 
           if (index === activeIndex) {
+            video.preload = "auto";
             video.play().catch(() => {});
           }
         });
@@ -554,18 +557,9 @@
         progressBar.value = 0;
         currentTimeText.textContent = "0:00";
 
-        if (popupVideo.readyState >= 1) {
-          popupVideo.play().catch(() => {});
-        } else {
-          popupVideo.addEventListener(
-            "loadedmetadata",
-            () => {
-              popupVideo.currentTime = 0;
-              popupVideo.play().catch(() => {});
-            },
-            { once: true },
-          );
-        }
+        // preload is "none", so play() itself starts the download (waiting for
+        // loadedmetadata first would wait forever)
+        popupVideo.play().catch(() => {});
 
         updatePlayIcons(true);
       }

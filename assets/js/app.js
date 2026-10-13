@@ -106,7 +106,7 @@ function renderTopicPoints(topicNumber) {
     .map(
       (point) =>
         `<div class="swiper-slide">` +
-        `<video muted playsinline loop preload="metadata">` +
+        `<video muted playsinline loop preload="none">` +
         `<source src="./assets/videos/${topicNumber}-${point.id}.mp4" type="video/mp4" />` +
         `</video>` +
         `</div>`,

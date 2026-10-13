@@ -108,7 +108,6 @@
 
   <!-- Swiper JS -->
   <script src="./assets/js/swiper-bundle.min.js"></script>
-  <script src="./assets/js/djp.js"></script>
   <script src="./assets/js/data.js"></script>
   <script src="./assets/js/app.js"></script>
   <script src="./assets/js/video-popup.js"></script>
@@ -159,8 +158,11 @@
       allVideos.forEach((video, index) => {
         video.pause();
         video.currentTime = 0;
+        // inactive slides must not download until their slide is reached
+        video.preload = "none";
 
         if (index === activeIndex) {
+          video.preload = "auto";
           video.play().catch(() => { });
         }
       });

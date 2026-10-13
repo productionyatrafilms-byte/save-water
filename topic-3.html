@@ -112,7 +112,6 @@
 
     <!-- Swiper JS -->
     <script src="./assets/js/swiper-bundle.min.js"></script>
-    <script src="./assets/js/djp.js"></script>
     <script src="./assets/js/data.js"></script>
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/video-popup.js"></script>
@@ -163,12 +162,30 @@
         allVideos.forEach((video, index) => {
           video.pause();
           video.currentTime = 0;
+          // inactive slides must not download until their slide is reached
+          video.preload = "none";
 
           if (index === activeIndex) {
+            video.preload = "auto";
             video.play().catch(() => {});
           }
         });
       }
+
+      // Browsers pause (or refuse to start) video in a hidden tab, and the play() call made on
+      // load / slide change is not retried — pick the active slide's video back up when the tab
+      // is shown again (but not while the START popup is open over it).
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden || document.querySelector(".video-popup.active")) return;
+
+        const activeVideo = document.querySelectorAll(".video-swiper video")[
+          videoSwiper.activeIndex
+        ];
+
+        if (activeVideo && activeVideo.paused) {
+          activeVideo.play().catch(() => {});
+        }
+      });
 
       function updateNavButtons(swiper) {
         videoPopup.sync(swiper.activeIndex);
